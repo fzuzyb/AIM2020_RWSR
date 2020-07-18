@@ -1,0 +1,48 @@
+20-07-18 10:32:45.720 - INFO:   name: Track3
+  use_tb_logger: True
+  model: RRDB
+  gpu_ids: [0]
+  gpus: 1
+  nodes: 1
+  local_rank: 0
+  master_ip: 127.0.0.1
+  master_port: 4321
+  datasets:[
+    val:[
+      name: AIM2020TEST
+      mode: SR
+      pad: 5
+      ensemble: ture
+      scale: 4
+      dataroot_HQ: ../../dataset/Track3
+      dataroot_LQ: ../../dataset/Track3
+      batch_size: 1
+      phase: val
+      data_type: img
+    ]
+  ]
+  network_G_SR:[
+    which_model_G: RRDBONet
+    in_nc: 3
+    out_nc: 3
+    nb: 23
+    nf: 64
+  ]
+  path:[
+    pretrain_model_G_R: ../../experiments/Track3/model/RRDB_x4.pth
+    strict_load: True
+    resume_state: None
+    root: /mnt/cv/code/AIM2020_RWSR
+    results_root: /mnt/cv/code/AIM2020_RWSR/experiments/Track3/results
+    log: /mnt/cv/code/AIM2020_RWSR/experiments/Track3/results
+  ]
+  logger:[
+    print_freq: 20
+    save_checkpoint_freq: 10000.0
+  ]
+  is_train: False
+
+20-07-18 10:32:52.441 - INFO: Loading models for G [../../experiments/Track3/model/RRDB_x4.pth] ...
+20-07-18 10:32:53.118 - INFO: Model [RRDBM] is created.
+20-07-18 10:32:53.119 - INFO: 
+Testing [AIM2020TEST]...

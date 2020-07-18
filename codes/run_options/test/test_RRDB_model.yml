@@ -1,0 +1,52 @@
+#### general settings
+name: Track3
+use_tb_logger: true
+model: RRDB
+
+
+#distributed
+gpu_ids: [0]  # gpu_id for using
+gpus: 1       # how many gpus for train each one node
+nodes: 1      # how many nodes for train
+local_rank: 0
+master_ip: '127.0.0.1'
+master_port: '4321'
+
+
+
+
+#### datasets
+datasets:
+  val:
+    name: AIM2020TEST
+    mode: SR
+    pad: 5
+    ensemble: ture
+    scale: 4
+    dataroot_HQ: ../../dataset/Track3
+    dataroot_LQ: ../../dataset/Track3
+    batch_size: 1
+
+
+
+#### network structures
+network_G_SR:
+  which_model_G: RRDBONet
+  in_nc: 3
+  out_nc: 3
+  nb: 23
+  nf: 64
+  
+
+
+#### path
+path:
+  pretrain_model_G_R: ../../experiments/Track3/model/RRDB_x4.pth
+  strict_load: True
+  resume_state:
+
+
+#### logger
+logger:
+  print_freq: 20
+  save_checkpoint_freq: !!float 10000
